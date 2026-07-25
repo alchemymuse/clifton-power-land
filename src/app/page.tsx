@@ -7,12 +7,8 @@ import {
   Wifi,
   MapPin,
   Building2,
-  ArrowRight,
   Download,
   Mail,
-  Phone,
-  User,
-  MessageSquare,
   CheckCircle2,
   Shield,
   Clock,
@@ -58,15 +54,6 @@ function Nav() {
           ))}
         </div>
 
-        {/* CTA */}
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors"
-        >
-          Request Info
-          <ArrowRight className="w-4 h-4" />
-        </a>
-
         {/* Mobile toggle */}
         <button
           onClick={() => setOpen(!open)}
@@ -90,13 +77,6 @@ function Nav() {
               {l.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            onClick={() => setOpen(false)}
-            className="bg-primary text-white text-sm font-semibold px-5 py-2.5 rounded-lg text-center mt-2"
-          >
-            Request Info
-          </a>
         </div>
       )}
     </nav>
@@ -106,41 +86,35 @@ function Nav() {
 /* ───────────────────────── HERO ───────────────────────── */
 function Hero() {
   return (
-    <section className="pt-28 pb-20 md:pt-36 md:pb-28 bg-gradient-to-b from-slate-50 to-white">
+    <section className="pt-24 pb-14 md:pt-28 md:pb-20 bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="max-w-3xl">
           {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/15 text-primary text-xs font-semibold tracking-wide uppercase px-3.5 py-1.5 rounded-full mb-6">
+          <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/15 text-primary text-xs font-semibold tracking-wide uppercase px-3.5 py-1.5 rounded-full mb-5">
             <Zap className="w-3.5 h-3.5" />
             Data Center Ready Land &middot; For Sale
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-navy leading-[1.08] tracking-tight mb-6 text-balance">
+          <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-navy leading-[1.08] tracking-tight mb-5 text-balance">
             74 MW Shovel-Ready AI Data Center Land with{" "}
             <span className="text-primary">Up to 800 Gbps</span> Redundant
             Fiber
           </h1>
 
-          <p className="text-lg text-slate-500 leading-relaxed mb-8 max-w-2xl">
+          <p className="text-lg text-slate-500 leading-relaxed mb-6 max-w-2xl">
             ±14 acres, flat &amp; cleared in Bosque County, TX — strategically
-            outside Clifton city limits. 138 kV transmission via TNMP, ERCOT
-            North, dual-path carrier fiber (FiberLight &amp; AT&amp;T),
-            municipal water, and a target energization of Q3 2027.
+            outside Clifton city limits. Interconnection study completed. 138 kV
+            transmission via TNMP, ERCOT North, dual-path carrier fiber
+            (FiberLight &amp; AT&amp;T), municipal water, and a target
+            energization of Q3 2027.
           </p>
 
-          {/* CTAs */}
+          {/* CTA */}
           <div className="flex flex-col sm:flex-row gap-3">
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-7 py-3.5 rounded-lg text-[15px] transition-colors shadow-sm shadow-primary/20"
-            >
-              Inquire with Landowner
-              <ArrowRight className="w-4 h-4" />
-            </a>
             <a
               href="/clifton-site-overview.pdf"
               target="_blank"
-              className="inline-flex items-center justify-center gap-2 bg-white border border-slate-200 hover:border-slate-300 text-navy font-semibold px-7 py-3.5 rounded-lg text-[15px] transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-7 py-3.5 rounded-lg text-[15px] transition-colors shadow-sm shadow-primary/20"
             >
               <Download className="w-4 h-4" />
               Download Site Overview (PDF)
@@ -149,7 +123,7 @@ function Hero() {
         </div>
 
         {/* Badge bar */}
-        <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
             { icon: Zap, label: "74 MW Power", sub: "138 kV · ERCOT North" },
             {
@@ -194,7 +168,7 @@ function SpecsGrid() {
       icon: Zap,
       title: "74 MW Power Capacity",
       detail:
-        "Application submitted for 74 MW via 138 kV transmission. TNMP utility, ERCOT North competitive wholesale market. Self-built substation on-site.",
+        "Interconnection study completed for 74 MW via 138 kV transmission. TNMP utility, ERCOT North competitive wholesale market. Self-built substation on-site.",
       highlight: "74 MW",
     },
     {
@@ -208,7 +182,7 @@ function SpecsGrid() {
       icon: Wifi,
       title: "Up to 800 Gbps Fiber",
       detail:
-        "Dual-loop fully redundant dark fiber pathway. Two premier Tier-1 carriers — FiberLight and AT&T — with fiber already extended to the property boundary.",
+        "Dual-loop, dual-path fully redundant dark fiber pathway. Two premier Tier-1 carriers — FiberLight and AT&T — with fiber already extended to the property boundary.",
       highlight: "800 Gbps",
     },
     {
@@ -229,19 +203,19 @@ function SpecsGrid() {
       icon: Clock,
       title: "Energization Q3 2027",
       detail:
-        "Target energization 2027 Q3. Shovel-ready site with flat, cleared, rectangular parcel ideal for efficient build-out and phased expansion.",
+        "Feasibility study completed. Target energization 2027 Q3. Shovel-ready site with flat, cleared, rectangular parcel ideal for efficient build-out and phased expansion.",
       highlight: "2027 Q3",
     },
   ];
 
   return (
-    <section id="specs" className="py-20 bg-white">
+    <section id="specs" className="py-14 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-14">
+        <div className="text-center mb-10">
           <div className="text-xs font-semibold tracking-[0.14em] uppercase text-primary mb-3">
             Site Specifications
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-3">
             Built for AI-Scale Infrastructure
           </h2>
           <p className="text-slate-500 max-w-2xl mx-auto">
@@ -280,19 +254,20 @@ function SpecsGrid() {
 /* ───────────── FIBER DEEP DIVE ───────────── */
 function FiberSection() {
   return (
-    <section className="py-20 bg-slate-50">
+    <section className="py-14 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-14">
+        <div className="text-center mb-10">
           <div className="text-xs font-semibold tracking-[0.14em] uppercase text-primary mb-3">
             Connectivity
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-3">
             Dual-Carrier Fiber Redundancy
           </h2>
           <p className="text-slate-500 max-w-2xl mx-auto">
             Two independent Tier-1 fiber carriers already at the property
-            boundary — zero single points of failure for mission-critical AI
-            workloads.
+            boundary — dual-loop, dual-path dark fiber with up to 800 Gbps
+            combined throughput and zero single points of failure for
+            mission-critical AI workloads.
           </p>
         </div>
 
@@ -357,15 +332,15 @@ function FiberSection() {
         </div>
 
         {/* Combined specs callout */}
-        <div className="mt-8 max-w-4xl mx-auto bg-navy rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6">
+        <div className="mt-6 max-w-4xl mx-auto bg-navy rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6">
           <div className="flex-1 text-center md:text-left">
             <div className="text-white font-bold text-xl mb-1">
               Up to 800 Gbps Total Throughput
             </div>
             <p className="text-slate-400 text-sm">
-              Dual-loop ring topology with automatic failover. No single point
-              of failure for AI model training, inference workloads, and cloud
-              interconnection.
+              Dual-loop, dual-path ring topology with automatic failover. No
+              single point of failure for AI model training, inference workloads,
+              and cloud interconnection.
             </p>
           </div>
           <div className="flex gap-4">
@@ -390,26 +365,26 @@ function FiberSection() {
 /* ────────── LOCATION ADVANTAGES ────────── */
 function LocationSection() {
   return (
-    <section id="location" className="py-20 bg-white">
+    <section id="location" className="py-14 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
           {/* Text */}
           <div>
             <div className="text-xs font-semibold tracking-[0.14em] uppercase text-primary mb-3">
               Strategic Positioning
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-5">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-4">
               Outside City Limits.
               <br />
               Inside the Opportunity.
             </h2>
-            <p className="text-slate-500 mb-8 leading-relaxed">
+            <p className="text-slate-500 mb-6 leading-relaxed">
               Situated in unincorporated Bosque County, outside Clifton city
               limits — this site eliminates the red tape of municipal zoning
               while preserving full access to utility infrastructure.
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {[
                 {
                   title: "Speed to Market",
@@ -496,9 +471,9 @@ function GallerySection() {
   ];
 
   return (
-    <section id="gallery" className="py-20 bg-slate-50">
+    <section id="gallery" className="py-14 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <div className="text-xs font-semibold tracking-[0.14em] uppercase text-primary mb-3">
             Site Gallery
           </div>
@@ -528,193 +503,48 @@ function GallerySection() {
   );
 }
 
-/* ────────── CONTACT FORM ────────── */
+/* ────────── CONTACT ────────── */
 function ContactSection() {
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-
-    const subject = encodeURIComponent("Clifton AI Power Land Inquiry");
-    const body = encodeURIComponent(
-      `Name: ${data.get("name")}\nCompany: ${data.get("company")}\nEmail: ${data.get("email")}\nPhone: ${data.get("phone")}\nBuyer Type: ${data.get("buyerType")}\n\nMessage:\n${data.get("message")}`
-    );
-
-    window.open(
-      `mailto:clfvoltcore@gmail.com?subject=${subject}&body=${body}`,
-      "_self"
-    );
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
-  };
-
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="py-14 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-5 gap-12">
-          {/* Left info */}
-          <div className="lg:col-span-2">
-            <div className="text-xs font-semibold tracking-[0.14em] uppercase text-primary mb-3">
-              Contact
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-5">
-              Ready to Move Forward?
-            </h2>
-            <p className="text-slate-500 mb-8 leading-relaxed">
-              Contact the landowner directly. Full due-diligence packages,
-              survey maps, and utility confirmation available upon request.
-            </p>
-
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center">
-                  <Building2 className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <div className="text-sm font-bold text-navy">
-                    CLF VOLTCORE LLC
-                  </div>
-                  <div className="text-xs text-slate-400">
-                    Direct from Landowner
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <a
-                    href="mailto:clfvoltcore@gmail.com"
-                    className="text-sm font-semibold text-primary hover:underline"
-                  >
-                    clfvoltcore@gmail.com
-                  </a>
-                  <div className="text-xs text-slate-400">Direct Inquiry</div>
-                </div>
-              </div>
-            </div>
+        <div className="max-w-lg mx-auto text-center">
+          <div className="text-xs font-semibold tracking-[0.14em] uppercase text-primary mb-3">
+            Contact
           </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-4">
+            Get in Touch
+          </h2>
+          <p className="text-slate-500 mb-8 leading-relaxed">
+            Contact the landowner directly. Full due-diligence packages, survey
+            maps, and utility confirmation available upon request.
+          </p>
 
-          {/* Form */}
-          <div className="lg:col-span-3">
-            <form
-              onSubmit={handleSubmit}
-              className="bg-slate-50 border border-slate-200 rounded-2xl p-6 md:p-8 space-y-5"
-            >
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-600 mb-1.5">
-                    Full Name *
-                  </label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                    <input
-                      name="name"
-                      required
-                      className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-navy placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                      placeholder="John Smith"
-                    />
-                  </div>
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 inline-flex flex-col items-center gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center">
+                <Building2 className="w-5 h-5 text-primary" />
+              </div>
+              <div className="text-left">
+                <div className="text-sm font-bold text-navy">
+                  CLF VOLTCORE LLC
                 </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-600 mb-1.5">
-                    Company / Entity
-                  </label>
-                  <div className="relative">
-                    <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                    <input
-                      name="company"
-                      className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-navy placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                      placeholder="Acme Corp"
-                    />
-                  </div>
+                <div className="text-xs text-slate-400">
+                  Direct from Landowner
                 </div>
               </div>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-600 mb-1.5">
-                    Email *
-                  </label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                    <input
-                      name="email"
-                      type="email"
-                      required
-                      className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-navy placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                      placeholder="john@company.com"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-600 mb-1.5">
-                    Phone Number
-                  </label>
-                  <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                    <input
-                      name="phone"
-                      type="tel"
-                      className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-navy placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                      placeholder="(555) 555-0100"
-                    />
-                  </div>
-                </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center">
+                <Mail className="w-5 h-5 text-primary" />
               </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1.5">
-                  Buyer Type
-                </label>
-                <select
-                  name="buyerType"
-                  className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-navy focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                >
-                  <option value="">Select one...</option>
-                  <option>Direct Developer</option>
-                  <option>CRE Broker</option>
-                  <option>Hyperscaler / Cloud Provider</option>
-                  <option>Investor / Fund</option>
-                  <option>Site Selection Consultant</option>
-                  <option>Other</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1.5">
-                  Message
-                </label>
-                <div className="relative">
-                  <MessageSquare className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
-                  <textarea
-                    name="message"
-                    rows={4}
-                    className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-navy placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none"
-                    placeholder="Interested in learning more about the site, power capacity, or requesting the full due-diligence package..."
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-3 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
+              <a
+                href="mailto:clfvoltcore@gmail.com"
+                className="text-sm font-semibold text-primary hover:underline"
               >
-                {submitted ? (
-                  <>
-                    <CheckCircle2 className="w-4 h-4" /> Opening Email Client...
-                  </>
-                ) : (
-                  <>
-                    Send Inquiry
-                    <ArrowRight className="w-4 h-4" />
-                  </>
-                )}
-              </button>
-            </form>
+                clfvoltcore@gmail.com
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -725,7 +555,7 @@ function ContactSection() {
 /* ────────── FOOTER ────────── */
 function Footer() {
   return (
-    <footer className="border-t border-slate-200 py-10 bg-white">
+    <footer className="border-t border-slate-200 py-6 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
@@ -741,7 +571,7 @@ function Footer() {
             confirmation and buyer due diligence.
           </div>
         </div>
-        <div className="mt-6 border-t border-slate-100 pt-5">
+        <div className="mt-4 border-t border-slate-100 pt-4">
           <p className="text-[11px] text-slate-400 leading-relaxed text-center max-w-3xl mx-auto">
             <strong>Broker Disclaimer:</strong> This website is provided for
             informational purposes only by CLF VOLTCORE LLC as the direct

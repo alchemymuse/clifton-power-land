@@ -2,77 +2,70 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import {
-  Zap,
-  Wifi,
-  MapPin,
-  Building2,
-  Download,
-  Mail,
-  CheckCircle2,
-  Shield,
-  Clock,
-  Droplets,
-  Radio,
-  ChevronRight,
-  Menu,
-  X,
-} from "lucide-react";
 
-/* ───────────────────────── NAV ───────────────────────── */
+/* ================================================================
+   NAV — Minimal top bar, no CTA button
+   ================================================================ */
 function Nav() {
   const [open, setOpen] = useState(false);
   const links = [
     { label: "Overview", href: "#overview" },
-    { label: "Power & Fiber", href: "#specs" },
+    { label: "Specs", href: "#specs" },
+    { label: "Fiber", href: "#fiber" },
     { label: "Location", href: "#location" },
-    { label: "Site Gallery", href: "#gallery" },
+    { label: "Gallery", href: "#gallery" },
     { label: "Contact", href: "#contact" },
   ];
 
   return (
-    <nav className="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Brand */}
-        <a href="#" className="flex items-center gap-2.5">
-          <Zap className="w-6 h-6 text-primary" strokeWidth={2.5} />
-          <span className="font-bold text-navy text-[15px] tracking-tight">
-            Clifton AI Power Land
+    <nav className="fixed top-0 inset-x-0 z-50 bg-surface/80 backdrop-blur-xl border-b border-rule">
+      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <a href="#" className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-accent" />
+          <span className="font-semibold text-ink text-sm tracking-tight">
+            CLIFTON AI POWER LAND
           </span>
         </a>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-7">
+        <div className="hidden md:flex items-center gap-6">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-slate-500 hover:text-navy transition-colors font-medium"
+              className="text-[13px] text-ink-muted hover:text-ink transition-colors"
             >
               {l.label}
             </a>
           ))}
         </div>
 
-        {/* Mobile toggle */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-navy"
+          className="md:hidden w-8 h-8 flex items-center justify-center"
           aria-label="Toggle menu"
         >
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <div className="space-y-1.5">
+            <span
+              className={`block w-5 h-[1.5px] bg-ink transition-transform ${open ? "rotate-45 translate-y-[4.5px]" : ""}`}
+            />
+            <span
+              className={`block w-5 h-[1.5px] bg-ink transition-opacity ${open ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block w-5 h-[1.5px] bg-ink transition-transform ${open ? "-rotate-45 -translate-y-[4.5px]" : ""}`}
+            />
+          </div>
         </button>
       </div>
 
-      {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-slate-100 bg-white px-6 py-4 flex flex-col gap-3">
+        <div className="md:hidden border-t border-rule bg-surface px-6 py-4 space-y-2">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="text-sm text-slate-600 hover:text-navy py-1.5 font-medium"
+              className="block text-sm text-ink-secondary hover:text-ink py-1.5"
             >
               {l.label}
             </a>
@@ -83,75 +76,93 @@ function Nav() {
   );
 }
 
-/* ───────────────────────── HERO ───────────────────────── */
+/* ================================================================
+   HERO — Large type, system status pill, single CTA
+   ================================================================ */
 function Hero() {
   return (
-    <section className="pt-24 pb-14 md:pt-28 md:pb-20 bg-gradient-to-b from-slate-50 to-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="max-w-3xl">
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/15 text-primary text-xs font-semibold tracking-wide uppercase px-3.5 py-1.5 rounded-full mb-5">
-            <Zap className="w-3.5 h-3.5" />
-            Data Center Ready Land &middot; For Sale
-          </div>
+    <section
+      id="overview"
+      className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden"
+    >
+      {/* Dot grid background */}
+      <div className="absolute inset-0 dot-grid opacity-40 pointer-events-none" />
 
-          <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-navy leading-[1.08] tracking-tight mb-5 text-balance">
-            74 MW Shovel-Ready AI Data Center Land with{" "}
-            <span className="text-primary">Up to 800 Gbps</span> Redundant
-            Fiber
-          </h1>
-
-          <p className="text-lg text-slate-500 leading-relaxed mb-6 max-w-2xl">
-            ±14 acres, flat &amp; cleared in Bosque County, TX — strategically
-            outside Clifton city limits. Interconnection study completed. 138 kV
-            transmission via TNMP, ERCOT North, dual-path carrier fiber
-            (FiberLight &amp; AT&amp;T), municipal water, and a target
-            energization of Q3 2027.
-          </p>
-
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a
-              href="/clifton-site-overview.pdf"
-              target="_blank"
-              className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-7 py-3.5 rounded-lg text-[15px] transition-colors shadow-sm shadow-primary/20"
-            >
-              <Download className="w-4 h-4" />
-              Download Site Overview (PDF)
-            </a>
-          </div>
+      <div className="relative max-w-6xl mx-auto px-6">
+        {/* Status pill */}
+        <div className="inline-flex items-center gap-2.5 border border-rule bg-white px-4 py-2 rounded-full mb-8">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+          </span>
+          <span className="font-mono text-[11px] tracking-widest uppercase text-ink-secondary">
+            Status: Study Completed
+          </span>
         </div>
 
-        {/* Badge bar */}
-        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3">
+        <h1 className="text-[clamp(2.25rem,5.5vw,4rem)] font-bold text-ink leading-[1.05] tracking-[-0.035em] max-w-4xl mb-6">
+          74&thinsp;MW Shovel-Ready
+          <br />
+          AI Data Center Land
+        </h1>
+
+        <p className="text-lg md:text-xl text-ink-secondary leading-relaxed max-w-2xl mb-10">
+          ±14 acres in Bosque County, TX — 138&thinsp;kV transmission,
+          dual-path redundant fiber up to{" "}
+          <span className="text-accent font-semibold">800&thinsp;Gbps</span>,
+          ERCOT North. Interconnection study completed.
+        </p>
+
+        <a
+          href="/clifton-site-overview.pdf"
+          target="_blank"
+          className="inline-flex items-center gap-2.5 bg-ink text-white text-sm font-medium px-6 py-3 rounded-lg hover:bg-ink/85 transition-colors"
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
+          Download Site Overview
+        </a>
+
+        {/* Metric strip */}
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-rule rounded-xl overflow-hidden border border-rule">
           {[
-            { icon: Zap, label: "74 MW Power", sub: "138 kV · ERCOT North" },
+            { value: "74 MW", label: "Power Capacity", sub: "138 kV · TNMP" },
             {
-              icon: Wifi,
-              label: "Up to 800 Gbps Fiber",
-              sub: "FiberLight & AT&T",
+              value: "800 Gbps",
+              label: "Fiber Throughput",
+              sub: "FiberLight + AT&T",
             },
             {
-              icon: MapPin,
-              label: "Outside City Limits",
-              sub: "Fast-track permitting",
+              value: "±14 ac",
+              label: "Parcel Size",
+              sub: "Flat & Cleared",
             },
             {
-              icon: Building2,
-              label: "CLF VOLTCORE LLC",
-              sub: "Direct from landowner",
+              value: "Q3 2027",
+              label: "Target Energization",
+              sub: "ERCOT North",
             },
-          ].map((b) => (
-            <div
-              key={b.label}
-              className="flex items-start gap-3 bg-white border border-slate-200 rounded-xl px-4 py-3.5"
-            >
-              <div className="w-9 h-9 rounded-lg bg-primary/5 flex items-center justify-center flex-none mt-0.5">
-                <b.icon className="w-4.5 h-4.5 text-primary" />
+          ].map((m) => (
+            <div key={m.value} className="bg-white px-5 py-5">
+              <div className="font-mono text-xl md:text-2xl font-bold text-ink tracking-tight">
+                {m.value}
               </div>
-              <div>
-                <div className="text-sm font-bold text-navy">{b.label}</div>
-                <div className="text-xs text-slate-400">{b.sub}</div>
+              <div className="text-[13px] font-medium text-ink-secondary mt-1">
+                {m.label}
+              </div>
+              <div className="font-mono text-[11px] text-ink-muted mt-0.5">
+                {m.sub}
               </div>
             </div>
           ))}
@@ -161,88 +172,133 @@ function Hero() {
   );
 }
 
-/* ───────────────── KEY SPECS GRID ───────────────── */
-function SpecsGrid() {
+/* ================================================================
+   SPECS — Engineering table / dense metric layout
+   ================================================================ */
+function SpecsSection() {
   const specs = [
     {
-      icon: Zap,
-      title: "74 MW Power Capacity",
-      detail:
-        "Interconnection study completed for 74 MW via 138 kV transmission. TNMP utility, ERCOT North competitive wholesale market. Self-built substation on-site.",
-      highlight: "74 MW",
+      category: "POWER",
+      items: [
+        {
+          label: "Total Capacity",
+          value: "74 MW",
+          note: "Interconnection study completed",
+          accent: true,
+        },
+        {
+          label: "Transmission",
+          value: "138 kV",
+          note: "TNMP utility provider",
+        },
+        {
+          label: "Market",
+          value: "ERCOT North",
+          note: "Competitive wholesale",
+        },
+        {
+          label: "Substation",
+          value: "< 1 mi",
+          note: "Self-build on-site step-down",
+        },
+      ],
     },
     {
-      icon: Radio,
-      title: "138 kV Transmission",
-      detail:
-        "Existing electric substation less than 1 mile from the property line. On-site step-down substation (self-build) for high-density deployment.",
-      highlight: "< 1 mi",
+      category: "CONNECTIVITY",
+      items: [
+        {
+          label: "Max Throughput",
+          value: "800 Gbps",
+          note: "Dual-loop, dual-path dark fiber",
+          accent: true,
+        },
+        {
+          label: "Carrier 1",
+          value: "FiberLight",
+          note: "Texas-based, carrier-neutral",
+        },
+        {
+          label: "Carrier 2",
+          value: "AT&T",
+          note: "Tier-1 global backbone",
+        },
+        {
+          label: "Fiber Status",
+          value: "At boundary",
+          note: "Ring topology protection",
+        },
+      ],
     },
     {
-      icon: Wifi,
-      title: "Up to 800 Gbps Fiber",
-      detail:
-        "Dual-loop, dual-path fully redundant dark fiber pathway. Two premier Tier-1 carriers — FiberLight and AT&T — with fiber already extended to the property boundary.",
-      highlight: "800 Gbps",
-    },
-    {
-      icon: Shield,
-      title: "Outside City Limits",
-      detail:
-        "Located in unincorporated Bosque County (outside Clifton ETJ). Streamlined industrial permitting, lower tax burden, and flexible land use for heavy power infrastructure.",
-      highlight: "ETJ",
-    },
-    {
-      icon: Droplets,
-      title: "Municipal Water On-Site",
-      detail:
-        "Municipal water service already extended to the property boundary — critical for cooling infrastructure without drilling or permitting private wells.",
-      highlight: "On-site",
-    },
-    {
-      icon: Clock,
-      title: "Energization Q3 2027",
-      detail:
-        "Feasibility study completed. Target energization 2027 Q3. Shovel-ready site with flat, cleared, rectangular parcel ideal for efficient build-out and phased expansion.",
-      highlight: "2027 Q3",
+      category: "SITE",
+      items: [
+        {
+          label: "Parcel",
+          value: "±14 acres",
+          note: "Flat, cleared, rectangular",
+        },
+        {
+          label: "Jurisdiction",
+          value: "Unincorporated",
+          note: "Outside Clifton ETJ",
+          accent: true,
+        },
+        {
+          label: "Water",
+          value: "Municipal",
+          note: "Service at property boundary",
+        },
+        {
+          label: "Energization",
+          value: "Q3 2027",
+          note: "Feasibility study completed",
+        },
+      ],
     },
   ];
 
   return (
-    <section id="specs" className="py-14 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-10">
-          <div className="text-xs font-semibold tracking-[0.14em] uppercase text-primary mb-3">
-            Site Specifications
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-3">
-            Built for AI-Scale Infrastructure
+    <section id="specs" className="py-20 bg-white border-y border-rule">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="mb-12">
+          <span className="font-mono text-[11px] tracking-widest uppercase text-ink-muted">
+            Specifications
+          </span>
+          <h2 className="text-[2rem] md:text-[2.5rem] font-bold text-ink tracking-[-0.03em] mt-2">
+            Infrastructure at a Glance
           </h2>
-          <p className="text-slate-500 max-w-2xl mx-auto">
-            Every critical utility — power, fiber, and water — already at or
-            near the property boundary. Designed for rapid deployment at
-            hyperscaler density.
-          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {specs.map((s) => (
-            <div
-              key={s.title}
-              className="group border border-slate-200 rounded-2xl p-6 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center">
-                  <s.icon className="w-5 h-5 text-primary" />
-                </div>
-                <span className="font-mono text-xs font-bold text-primary/60 bg-primary/5 px-2.5 py-1 rounded-md">
-                  {s.highlight}
-                </span>
+        <div className="grid lg:grid-cols-3 gap-8">
+          {specs.map((group) => (
+            <div key={group.category}>
+              <div className="font-mono text-[11px] tracking-[0.15em] text-ink-muted mb-4 pb-3 border-b border-rule">
+                {group.category}
               </div>
-              <h3 className="text-lg font-bold text-navy mb-2">{s.title}</h3>
-              <p className="text-sm text-slate-500 leading-relaxed">
-                {s.detail}
-              </p>
+              <div className="space-y-0">
+                {group.items.map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex items-baseline justify-between py-3 border-b border-rule-light last:border-0"
+                  >
+                    <div>
+                      <div className="text-sm text-ink-secondary">
+                        {item.label}
+                      </div>
+                      <div className="text-[12px] text-ink-muted mt-0.5">
+                        {item.note}
+                      </div>
+                    </div>
+                    <div
+                      className={`font-mono text-sm font-semibold tracking-tight ${
+                        item.accent ? "text-accent" : "text-ink"
+                      }`}
+                    >
+                      {item.value}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -251,50 +307,49 @@ function SpecsGrid() {
   );
 }
 
-/* ───────────── FIBER DEEP DIVE ───────────── */
+/* ================================================================
+   FIBER — Dual-carrier comparison
+   ================================================================ */
 function FiberSection() {
   return (
-    <section className="py-14 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-10">
-          <div className="text-xs font-semibold tracking-[0.14em] uppercase text-primary mb-3">
+    <section id="fiber" className="py-20">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="mb-12">
+          <span className="font-mono text-[11px] tracking-widest uppercase text-ink-muted">
             Connectivity
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-3">
+          </span>
+          <h2 className="text-[2rem] md:text-[2.5rem] font-bold text-ink tracking-[-0.03em] mt-2">
             Dual-Carrier Fiber Redundancy
           </h2>
-          <p className="text-slate-500 max-w-2xl mx-auto">
-            Two independent Tier-1 fiber carriers already at the property
-            boundary — dual-loop, dual-path dark fiber with up to 800 Gbps
-            combined throughput and zero single points of failure for
-            mission-critical AI workloads.
+          <p className="text-ink-secondary mt-3 max-w-xl">
+            Two independent Tier-1 carriers at the property boundary.
+            Dual-loop, dual-path architecture — zero single points of failure.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-px bg-rule rounded-xl overflow-hidden border border-rule">
           {/* FiberLight */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
-                <Wifi className="w-5 h-5 text-blue-600" />
+          <div className="bg-white p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-md bg-blue-50 flex items-center justify-center">
+                <div className="w-3 h-3 rounded-full bg-blue-500" />
               </div>
               <div>
-                <div className="text-base font-bold text-navy">FiberLight</div>
-                <div className="text-xs text-slate-400">Carrier 1</div>
+                <div className="font-semibold text-ink">FiberLight</div>
+                <div className="font-mono text-[11px] text-ink-muted">
+                  CARRIER 1
+                </div>
               </div>
             </div>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {[
                 "Low-latency dark fiber infrastructure",
                 "Dedicated high-capacity wavelengths",
                 "Texas-based, carrier-neutral provider",
                 "Ring topology protection available",
               ].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-2 text-sm text-slate-600"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-none" />
+                <li key={item} className="flex items-start gap-2.5 text-sm text-ink-secondary">
+                  <span className="mt-2 w-1 h-1 rounded-full bg-ink-muted flex-none" />
                   {item}
                 </li>
               ))}
@@ -302,28 +357,27 @@ function FiberSection() {
           </div>
 
           {/* AT&T */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center">
-                <Radio className="w-5 h-5 text-sky-600" />
+          <div className="bg-white p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-md bg-sky-50 flex items-center justify-center">
+                <div className="w-3 h-3 rounded-full bg-sky-500" />
               </div>
               <div>
-                <div className="text-base font-bold text-navy">AT&amp;T</div>
-                <div className="text-xs text-slate-400">Carrier 2</div>
+                <div className="font-semibold text-ink">AT&amp;T</div>
+                <div className="font-mono text-[11px] text-ink-muted">
+                  CARRIER 2
+                </div>
               </div>
             </div>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {[
                 "Tier-1 global IP transit backbone",
                 "Full carrier neutrality & peering",
                 "Enterprise-grade SLA guarantees",
                 "Nationwide & international reach",
               ].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-2 text-sm text-slate-600"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-none" />
+                <li key={item} className="flex items-start gap-2.5 text-sm text-ink-secondary">
+                  <span className="mt-2 w-1 h-1 rounded-full bg-ink-muted flex-none" />
                   {item}
                 </li>
               ))}
@@ -331,28 +385,24 @@ function FiberSection() {
           </div>
         </div>
 
-        {/* Combined specs callout */}
-        <div className="mt-6 max-w-4xl mx-auto bg-navy rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6">
-          <div className="flex-1 text-center md:text-left">
-            <div className="text-white font-bold text-xl mb-1">
-              Up to 800 Gbps Total Throughput
+        {/* Throughput callout */}
+        <div className="mt-6 border border-rule rounded-xl bg-ink text-white p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>
+            <div className="font-mono text-2xl md:text-3xl font-bold tracking-tight">
+              800 Gbps
             </div>
-            <p className="text-slate-400 text-sm">
-              Dual-loop, dual-path ring topology with automatic failover. No
-              single point of failure for AI model training, inference workloads,
-              and cloud interconnection.
-            </p>
+            <div className="text-zinc-400 text-sm mt-1">
+              Combined dual-loop, dual-path throughput with automatic failover
+            </div>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-3">
             {["FiberLight", "AT&T"].map((c) => (
               <div
                 key={c}
-                className="bg-white/10 border border-white/10 rounded-lg px-4 py-2 text-center"
+                className="border border-white/15 rounded-md px-4 py-2"
               >
-                <div className="text-white font-mono font-bold text-sm">
-                  {c}
-                </div>
-                <div className="text-slate-400 text-xs">Tier-1</div>
+                <div className="font-mono text-sm font-medium">{c}</div>
+                <div className="text-zinc-500 text-[11px]">Tier-1</div>
               </div>
             ))}
           </div>
@@ -362,66 +412,64 @@ function FiberSection() {
   );
 }
 
-/* ────────── LOCATION ADVANTAGES ────────── */
+/* ================================================================
+   LOCATION
+   ================================================================ */
 function LocationSection() {
+  const advantages = [
+    {
+      title: "Speed to Market",
+      desc: "No municipal zoning delays. Industrial-class permitting on a streamlined county pathway.",
+    },
+    {
+      title: "Favorable Tax & Regulatory Climate",
+      desc: "Lower property tax burden and flexible land use for heavy power infrastructure.",
+    },
+    {
+      title: "~90 min from Dallas–Fort Worth",
+      desc: "State Highway 6 frontage, rail and transmission adjacent. Non-residential setting.",
+    },
+    {
+      title: "±14 Acres — Flat, Cleared, Rectangular",
+      desc: "Optimal geometry for efficient data hall layout and phased campus expansion.",
+    },
+  ];
+
   return (
-    <section id="location" className="py-14 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          {/* Text */}
+    <section id="location" className="py-20 bg-white border-y border-rule">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div>
-            <div className="text-xs font-semibold tracking-[0.14em] uppercase text-primary mb-3">
-              Strategic Positioning
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-4">
+            <span className="font-mono text-[11px] tracking-widest uppercase text-ink-muted">
+              Location
+            </span>
+            <h2 className="text-[2rem] md:text-[2.5rem] font-bold text-ink tracking-[-0.03em] mt-2 mb-4">
               Outside City Limits.
               <br />
               Inside the Opportunity.
             </h2>
-            <p className="text-slate-500 mb-6 leading-relaxed">
-              Situated in unincorporated Bosque County, outside Clifton city
-              limits — this site eliminates the red tape of municipal zoning
-              while preserving full access to utility infrastructure.
+            <p className="text-ink-secondary mb-8">
+              Unincorporated Bosque County, outside Clifton city limits —
+              streamlined permitting with full access to utility infrastructure.
             </p>
 
-            <div className="space-y-3">
-              {[
-                {
-                  title: "Speed to Market",
-                  desc: "No lengthy municipal zoning delays. Industrial-class permitting on a streamlined county pathway.",
-                },
-                {
-                  title: "Favorable Tax & Regulatory Climate",
-                  desc: "Lower property tax burden and flexible land use rules designed for heavy power and industrial infrastructure.",
-                },
-                {
-                  title: "~90 Minutes from Dallas–Fort Worth",
-                  desc: "State Highway 6 frontage, rail and transmission adjacent. Quiet, non-residential setting ideal for 24/7 operations.",
-                },
-                {
-                  title: "±14 Acres — Flat, Cleared, Rectangular",
-                  desc: "Optimal parcel geometry for efficient data hall layout, cooling infrastructure, and phased campus expansion.",
-                },
-              ].map((item) => (
+            <div className="space-y-0 border-t border-rule">
+              {advantages.map((item) => (
                 <div
                   key={item.title}
-                  className="flex gap-3 items-start border border-slate-100 rounded-xl p-4 hover:border-slate-200 transition-colors"
+                  className="py-4 border-b border-rule-light"
                 >
-                  <ChevronRight className="w-5 h-5 text-primary mt-0.5 flex-none" />
-                  <div>
-                    <div className="text-sm font-bold text-navy">
-                      {item.title}
-                    </div>
-                    <div className="text-sm text-slate-500">{item.desc}</div>
+                  <div className="text-sm font-semibold text-ink">
+                    {item.title}
                   </div>
+                  <div className="text-sm text-ink-muted mt-1">{item.desc}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Map image */}
           <div className="relative">
-            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+            <div className="rounded-xl overflow-hidden border border-rule">
               <Image
                 src="/land-map.jpg"
                 alt="Clifton TX site infrastructure map showing water lines, sewer, and property boundary"
@@ -430,12 +478,12 @@ function LocationSection() {
                 className="w-full h-auto"
               />
             </div>
-            <div className="absolute -bottom-4 -right-4 bg-white border border-slate-200 rounded-xl shadow-lg px-4 py-3">
-              <div className="text-xs text-slate-400 font-mono">
+            <div className="absolute -bottom-3 -right-3 bg-white border border-rule rounded-lg px-4 py-2.5 shadow-sm">
+              <div className="font-mono text-[10px] tracking-widest text-ink-muted">
                 BOSQUE COUNTY, TX
               </div>
-              <div className="text-sm font-bold text-navy">
-                Hwy 6 &middot; Near Clifton
+              <div className="text-sm font-semibold text-ink">
+                Hwy 6 · Near Clifton
               </div>
             </div>
           </div>
@@ -445,7 +493,9 @@ function LocationSection() {
   );
 }
 
-/* ────────── GALLERY ────────── */
+/* ================================================================
+   GALLERY
+   ================================================================ */
 function GallerySection() {
   const images = [
     {
@@ -461,7 +511,7 @@ function GallerySection() {
     {
       src: "/land-sunset.jpg",
       alt: "Site at sunset showing flat terrain and power lines",
-      caption: "Quiet, non-residential setting with transmission adjacent",
+      caption: "Transmission-adjacent, non-residential setting",
     },
     {
       src: "/land-field.jpg",
@@ -471,30 +521,32 @@ function GallerySection() {
   ];
 
   return (
-    <section id="gallery" className="py-14 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-8">
-          <div className="text-xs font-semibold tracking-[0.14em] uppercase text-primary mb-3">
-            Site Gallery
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight">
+    <section id="gallery" className="py-20">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="mb-10">
+          <span className="font-mono text-[11px] tracking-widest uppercase text-ink-muted">
+            Gallery
+          </span>
+          <h2 className="text-[2rem] md:text-[2.5rem] font-bold text-ink tracking-[-0.03em] mt-2">
             See the Property
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid md:grid-cols-2 gap-4">
           {images.map((img) => (
             <div key={img.src} className="group">
-              <div className="rounded-2xl overflow-hidden border border-slate-200 bg-white">
+              <div className="rounded-xl overflow-hidden border border-rule bg-white">
                 <Image
                   src={img.src}
                   alt={img.alt}
                   width={800}
                   height={500}
-                  className="w-full h-64 object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                  className="w-full h-60 object-cover group-hover:scale-[1.015] transition-transform duration-700"
                 />
               </div>
-              <p className="text-xs text-slate-400 mt-2 px-1">{img.caption}</p>
+              <p className="font-mono text-[11px] text-ink-muted mt-2.5 px-0.5">
+                {img.caption}
+              </p>
             </div>
           ))}
         </div>
@@ -503,44 +555,44 @@ function GallerySection() {
   );
 }
 
-/* ────────── CONTACT ────────── */
+/* ================================================================
+   CONTACT — Pinned-style minimal bar
+   ================================================================ */
 function ContactSection() {
   return (
-    <section id="contact" className="py-14 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="max-w-lg mx-auto text-center">
-          <div className="text-xs font-semibold tracking-[0.14em] uppercase text-primary mb-3">
-            Contact
+    <section id="contact" className="py-16 bg-white border-t border-rule">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-12">
+          <div>
+            <span className="font-mono text-[11px] tracking-widest uppercase text-ink-muted">
+              Contact
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-ink tracking-[-0.025em] mt-2">
+              Get in Touch
+            </h2>
+            <p className="text-ink-secondary text-sm mt-2 max-w-md">
+              Direct from landowner. Due-diligence packages, survey maps, and
+              utility confirmation available upon request.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-4">
-            Get in Touch
-          </h2>
-          <p className="text-slate-500 mb-8 leading-relaxed">
-            Contact the landowner directly. Full due-diligence packages, survey
-            maps, and utility confirmation available upon request.
-          </p>
 
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 inline-flex flex-col items-center gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center">
-                <Building2 className="w-5 h-5 text-primary" />
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 border border-rule rounded-xl bg-surface px-6 py-5">
+            <div>
+              <div className="font-mono text-[11px] tracking-widest uppercase text-ink-muted mb-1">
+                Entity
               </div>
-              <div className="text-left">
-                <div className="text-sm font-bold text-navy">
-                  CLF VOLTCORE LLC
-                </div>
-                <div className="text-xs text-slate-400">
-                  Direct from Landowner
-                </div>
+              <div className="text-sm font-semibold text-ink">
+                CLF VOLTCORE LLC
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center">
-                <Mail className="w-5 h-5 text-primary" />
+            <div className="hidden sm:block w-px h-8 bg-rule" />
+            <div>
+              <div className="font-mono text-[11px] tracking-widest uppercase text-ink-muted mb-1">
+                Email
               </div>
               <a
                 href="mailto:clfvoltcore@gmail.com"
-                className="text-sm font-semibold text-primary hover:underline"
+                className="text-sm font-semibold text-accent hover:underline underline-offset-2"
               >
                 clfvoltcore@gmail.com
               </a>
@@ -552,33 +604,36 @@ function ContactSection() {
   );
 }
 
-/* ────────── FOOTER ────────── */
+/* ================================================================
+   FOOTER
+   ================================================================ */
 function Footer() {
   return (
-    <footer className="border-t border-slate-200 py-6 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <footer className="border-t border-rule py-6">
+      <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
-            <Zap className="w-5 h-5 text-primary" />
-            <span className="text-sm font-bold text-navy">
-              Clifton AI Power Land
+            <div className="w-1.5 h-1.5 rounded-full bg-accent" />
+            <span className="font-mono text-xs text-ink-muted tracking-wide">
+              CLIFTON AI POWER LAND
             </span>
           </div>
-          <div className="text-xs text-slate-400 text-center max-w-xl">
+          <div className="text-[11px] text-ink-muted text-center max-w-xl leading-relaxed">
             &copy; {new Date().getFullYear()} CLF VOLTCORE LLC. All rights
-            reserved. Confidential property offering. All information deemed
-            reliable but not guaranteed and subject to verification, utility
-            confirmation and buyer due diligence.
+            reserved. All information deemed reliable but not guaranteed and
+            subject to verification, utility confirmation and buyer due
+            diligence.
           </div>
         </div>
-        <div className="mt-4 border-t border-slate-100 pt-4">
-          <p className="text-[11px] text-slate-400 leading-relaxed text-center max-w-3xl mx-auto">
-            <strong>Broker Disclaimer:</strong> This website is provided for
-            informational purposes only by CLF VOLTCORE LLC as the direct
-            landowner. No representation or warranty is made regarding the
-            accuracy of the information contained herein. Prospective buyers and
-            their brokers should independently verify all specifications,
-            utility commitments, and jurisdictional requirements.
+        <div className="mt-4 border-t border-rule-light pt-4">
+          <p className="text-[10px] text-ink-muted leading-relaxed text-center max-w-3xl mx-auto">
+            <span className="font-semibold">Broker Disclaimer:</span> This
+            website is provided for informational purposes only by CLF VOLTCORE
+            LLC as the direct landowner. No representation or warranty is made
+            regarding the accuracy of the information contained herein.
+            Prospective buyers and their brokers should independently verify all
+            specifications, utility commitments, and jurisdictional
+            requirements.
           </p>
         </div>
       </div>
@@ -586,14 +641,16 @@ function Footer() {
   );
 }
 
-/* ────────── PAGE ────────── */
+/* ================================================================
+   PAGE
+   ================================================================ */
 export default function Home() {
   return (
     <>
       <Nav />
-      <main id="overview">
+      <main>
         <Hero />
-        <SpecsGrid />
+        <SpecsSection />
         <FiberSection />
         <LocationSection />
         <GallerySection />

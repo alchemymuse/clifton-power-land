@@ -14,7 +14,6 @@ function Nav() {
     { label: "Fiber", href: "#fiber" },
     { label: "Location", href: "#location" },
     { label: "Gallery", href: "#gallery" },
-    { label: "Contact", href: "#contact" },
   ];
 
   return (
@@ -438,54 +437,32 @@ function LocationSection() {
   return (
     <section id="location" className="py-20 bg-white border-y border-rule">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          <div>
-            <span className="font-mono text-[11px] tracking-widest uppercase text-ink-muted">
-              Location
-            </span>
-            <h2 className="text-[2rem] md:text-[2.5rem] font-bold text-ink tracking-[-0.03em] mt-2 mb-4">
-              Outside City Limits.
-              <br />
-              Inside the Opportunity.
-            </h2>
-            <p className="text-ink-secondary mb-8">
-              Unincorporated Bosque County, outside Clifton city limits —
-              streamlined permitting with full access to utility infrastructure.
-            </p>
+        <div className="max-w-3xl">
+          <span className="font-mono text-[11px] tracking-widest uppercase text-ink-muted">
+            Location
+          </span>
+          <h2 className="text-[2rem] md:text-[2.5rem] font-bold text-ink tracking-[-0.03em] mt-2 mb-4">
+            Outside City Limits.
+            <br />
+            Inside the Opportunity.
+          </h2>
+          <p className="text-ink-secondary mb-8">
+            Unincorporated Bosque County, outside Clifton city limits —
+            streamlined permitting with full access to utility infrastructure.
+          </p>
 
-            <div className="space-y-0 border-t border-rule">
-              {advantages.map((item) => (
-                <div
-                  key={item.title}
-                  className="py-4 border-b border-rule-light"
-                >
-                  <div className="text-sm font-semibold text-ink">
-                    {item.title}
-                  </div>
-                  <div className="text-sm text-ink-muted mt-1">{item.desc}</div>
+          <div className="space-y-0 border-t border-rule">
+            {advantages.map((item) => (
+              <div
+                key={item.title}
+                className="py-4 border-b border-rule-light"
+              >
+                <div className="text-sm font-semibold text-ink">
+                  {item.title}
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="rounded-xl overflow-hidden border border-rule">
-              <Image
-                src="/land-map.jpg"
-                alt="Clifton TX site infrastructure map showing water lines, sewer, and property boundary"
-                width={830}
-                height={520}
-                className="w-full h-auto"
-              />
-            </div>
-            <div className="absolute -bottom-3 -right-3 bg-white border border-rule rounded-lg px-4 py-2.5 shadow-sm">
-              <div className="font-mono text-[10px] tracking-widest text-ink-muted">
-                BOSQUE COUNTY, TX
+                <div className="text-sm text-ink-muted mt-1">{item.desc}</div>
               </div>
-              <div className="text-sm font-semibold text-ink">
-                Hwy 6 · Near Clifton
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -556,55 +533,6 @@ function GallerySection() {
 }
 
 /* ================================================================
-   CONTACT — Pinned-style minimal bar
-   ================================================================ */
-function ContactSection() {
-  return (
-    <section id="contact" className="py-16 bg-white border-t border-rule">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-12">
-          <div>
-            <span className="font-mono text-[11px] tracking-widest uppercase text-ink-muted">
-              Contact
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-ink tracking-[-0.025em] mt-2">
-              Get in Touch
-            </h2>
-            <p className="text-ink-secondary text-sm mt-2 max-w-md">
-              Direct from landowner. Due-diligence packages, survey maps, and
-              utility confirmation available upon request.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 border border-rule rounded-xl bg-surface px-6 py-5">
-            <div>
-              <div className="font-mono text-[11px] tracking-widest uppercase text-ink-muted mb-1">
-                Entity
-              </div>
-              <div className="text-sm font-semibold text-ink">
-                CLF VOLTCORE LLC
-              </div>
-            </div>
-            <div className="hidden sm:block w-px h-8 bg-rule" />
-            <div>
-              <div className="font-mono text-[11px] tracking-widest uppercase text-ink-muted mb-1">
-                Email
-              </div>
-              <a
-                href="mailto:clfvoltcore@gmail.com"
-                className="text-sm font-semibold text-accent hover:underline underline-offset-2"
-              >
-                clfvoltcore@gmail.com
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================================================================
    FOOTER
    ================================================================ */
 function Footer() {
@@ -654,7 +582,6 @@ export default function Home() {
         <FiberSection />
         <LocationSection />
         <GallerySection />
-        <ContactSection />
       </main>
       <Footer />
     </>

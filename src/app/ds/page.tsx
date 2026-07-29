@@ -22,12 +22,12 @@ interface Lead {
 }
 
 const STAGES = [
-  { id: "lead",   name: "New Lead",       color: "#A1A1AA" },
-  { id: "sent",   name: "Materials Sent", color: "#0052FF" },
-  { id: "talk",   name: "In Discussion",  color: "#8B5CF6" },
-  { id: "dd",     name: "Due Diligence",  color: "#F59E0B" },
-  { id: "deal",   name: "Dealing",        color: "#EF4444" },
-  { id: "closed", name: "Closed / Hold",  color: "#22C55E" },
+  { id: "lead",   name: "新线索",       color: "#A1A1AA" },
+  { id: "sent",   name: "已发资料",     color: "#0052FF" },
+  { id: "talk",   name: "意向沟通",     color: "#8B5CF6" },
+  { id: "dd",     name: "尽调中",       color: "#F59E0B" },
+  { id: "deal",   name: "交易中",       color: "#EF4444" },
+  { id: "closed", name: "成交 / 搁置",  color: "#22C55E" },
 ];
 
 const STAGE_WEIGHT: Record<string, number> = {
@@ -42,21 +42,21 @@ function uid() {
 
 function seedData(): Lead[] {
   return [
-    { id: uid(), buyer: "Major Hyperscaler", loc: "US West", stage: "dd", price: "18500000", cap: "74MW",
-      broker: "Greenfield Realty", middle: "J. Lee (Energy Advisor)", first: "2026-06-18", prio: "high",
-      contact: "—", next: "Awaiting 30-day DD completion", notes: "LOI signed. Watching interconnection confirmation." },
-    { id: uid(), buyer: "XX Infrastructure Fund", loc: "New York", stage: "talk", price: "18500000", cap: "74MW",
+    { id: uid(), buyer: "某超大规模云厂商", loc: "美国西部", stage: "dd", price: "18500000", cap: "74MW",
+      broker: "Greenfield 地产", middle: "李经理（能源顾问）", first: "2026-06-18", prio: "high",
+      contact: "—", next: "等对方完成 30 天尽调", notes: "已签 LOI，关注并网确认。" },
+    { id: uid(), buyer: "XX 基础设施基金", loc: "纽约", stage: "talk", price: "18500000", cap: "74MW",
       broker: "Summit Realty", middle: "", first: "2026-07-02", prio: "high",
-      contact: "deal@example.com", next: "Tuesday call to review terms", notes: "Price sensitive, may negotiate down." },
-    { id: uid(), buyer: "Bitcoin Mining Corp", loc: "Texas", stage: "sent", price: "", cap: "Partial",
-      broker: "Lone Star Brokers", middle: "Mr. Wang", first: "2026-07-10", prio: "normal",
-      contact: "—", next: "Follow up on NDA signing", notes: "Only wants partial capacity." },
-    { id: uid(), buyer: "Overseas Family Office", loc: "Singapore", stage: "lead", price: "", cap: "TBD",
+      contact: "deal@example.com", next: "本周二电话过条款", notes: "对价格敏感，可能压价。" },
+    { id: uid(), buyer: "某比特币矿业公司", loc: "德州", stage: "sent", price: "", cap: "部分",
+      broker: "Lone Star Brokers", middle: "王先生", first: "2026-07-10", prio: "normal",
+      contact: "—", next: "跟进是否签 NDA", notes: "只要部分容量。" },
+    { id: uid(), buyer: "某海外家族办公室", loc: "新加坡", stage: "lead", price: "", cap: "待定",
       broker: "Horizon Partners", middle: "", first: "2026-07-20", prio: "watch",
-      contact: "—", next: "Verify buying capacity", notes: "Same buyer appears via different broker — clarify commission." },
-    { id: uid(), buyer: "Overseas Family Office", loc: "Singapore", stage: "talk", price: "18500000", cap: "74MW",
-      broker: "Summit Realty", middle: "C. Chen (Advisor)", first: "2026-07-05", prio: "normal",
-      contact: "family@example.com", next: "Verify first-referral date", notes: "Summit referred 15 days earlier — commission likely theirs." },
+      contact: "—", next: "确认真实购买力", notes: "注意：与「意向沟通」里同名买家经不同中介引荐，需理清佣金归属。" },
+    { id: uid(), buyer: "某海外家族办公室", loc: "新加坡", stage: "talk", price: "18500000", cap: "74MW",
+      broker: "Summit Realty", middle: "陈顾问", first: "2026-07-05", prio: "normal",
+      contact: "family@example.com", next: "核对首引荐时间", notes: "Summit 早 15 天引荐，佣金大概率归 Summit。" },
   ];
 }
 
@@ -109,16 +109,16 @@ function AuthGate({ children }: { children: React.ReactNode }) {
           </span>
         </div>
         <h2 className="text-xl font-bold text-[#09090B] tracking-tight mb-1">
-          Pipeline Dashboard
+          渠道看板
         </h2>
         <p className="text-sm text-[#A1A1AA] mb-6">
-          Enter the access password to continue.
+          请输入访问密码以继续。
         </p>
         <input
           type="password"
           value={pw}
           onChange={(e) => setPw(e.target.value)}
-          placeholder="Password"
+          placeholder="密码"
           autoFocus
           className={`w-full px-4 py-3 rounded-lg border text-sm font-mono bg-[#FAF9F6] text-[#09090B] placeholder:text-[#A1A1AA] focus:outline-none focus:ring-2 focus:ring-[#0052FF]/20 focus:border-[#0052FF] ${
             error ? "border-red-400 shake" : "border-[#E4E4E7]"
@@ -128,11 +128,11 @@ function AuthGate({ children }: { children: React.ReactNode }) {
           type="submit"
           className="w-full mt-4 bg-[#09090B] text-white font-mono text-sm font-medium py-3 rounded-lg hover:bg-[#09090B]/85 transition-colors"
         >
-          Access Dashboard
+          进入看板
         </button>
         {error && (
           <p className="text-xs text-red-500 font-mono mt-3 text-center">
-            Invalid password
+            密码错误
           </p>
         )}
       </form>
@@ -205,7 +205,7 @@ function Modal({ lead, isNew, onSave, onDelete, onClose, allLeads }: ModalProps)
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#E4E4E7]">
           <h2 className="text-base font-bold text-[#09090B]">
-            {isNew ? "New Lead" : "Edit Lead"}
+            {isNew ? "新增线索" : "编辑线索"}
           </h2>
           <button
             onClick={onClose}
@@ -219,29 +219,29 @@ function Modal({ lead, isNew, onSave, onDelete, onClose, allLeads }: ModalProps)
         <div className="px-6 py-5 grid grid-cols-2 gap-3">
           <div className="col-span-2">
             <label className="block text-[11px] font-mono text-[#A1A1AA] tracking-wider mb-1">
-              BUYER / PROJECT NAME
+              买家 / 项目名称
             </label>
             <input
               className={fieldCls}
               value={form.buyer || ""}
               onChange={(e) => set("buyer", e.target.value)}
-              placeholder="e.g. Hyperscaler Corp / XX Capital"
+              placeholder="例：某数据中心开发商 / XX 资本"
             />
           </div>
           <div>
             <label className="block text-[11px] font-mono text-[#A1A1AA] tracking-wider mb-1">
-              LOCATION
+              买家所在地
             </label>
             <input
               className={fieldCls}
               value={form.loc || ""}
               onChange={(e) => set("loc", e.target.value)}
-              placeholder="e.g. New York"
+              placeholder="例：纽约 / 深圳"
             />
           </div>
           <div>
             <label className="block text-[11px] font-mono text-[#A1A1AA] tracking-wider mb-1">
-              STAGE
+              阶段
             </label>
             <select
               className={fieldCls}
@@ -257,7 +257,7 @@ function Modal({ lead, isNew, onSave, onDelete, onClose, allLeads }: ModalProps)
           </div>
           <div>
             <label className="block text-[11px] font-mono text-[#A1A1AA] tracking-wider mb-1">
-              OFFER (US$)
+              报价金额 (US$)
             </label>
             <input
               className={fieldCls}
@@ -273,43 +273,43 @@ function Modal({ lead, isNew, onSave, onDelete, onClose, allLeads }: ModalProps)
           </div>
           <div>
             <label className="block text-[11px] font-mono text-[#A1A1AA] tracking-wider mb-1">
-              CAPACITY
+              容量档
             </label>
             <select
               className={fieldCls}
               value={form.cap || "74MW"}
               onChange={(e) => set("cap", e.target.value)}
             >
-              <option value="74MW">74 MW (Full)</option>
-              <option value="Partial">Partial</option>
-              <option value="TBD">TBD</option>
+              <option value="74MW">74 MW（全量）</option>
+              <option value="部分">部分容量</option>
+              <option value="待定">待定</option>
             </select>
           </div>
           <div>
             <label className="block text-[11px] font-mono text-[#A1A1AA] tracking-wider mb-1">
-              REFERRING BROKER
+              引荐中介（第一层）
             </label>
             <input
               className={fieldCls}
               value={form.broker || ""}
               onChange={(e) => set("broker", e.target.value)}
-              placeholder="Who brought the lead"
+              placeholder="谁带来的线索"
             />
           </div>
           <div>
             <label className="block text-[11px] font-mono text-[#A1A1AA] tracking-wider mb-1">
-              INTERMEDIARY
+              中间人（第二层，选填）
             </label>
             <input
               className={fieldCls}
               value={form.middle || ""}
               onChange={(e) => set("middle", e.target.value)}
-              placeholder="Middle person (optional)"
+              placeholder="转介中间人"
             />
           </div>
           <div>
             <label className="block text-[11px] font-mono text-[#A1A1AA] tracking-wider mb-1">
-              FIRST REFERRAL DATE
+              首引荐日期
             </label>
             <input
               type="date"
@@ -320,50 +320,50 @@ function Modal({ lead, isNew, onSave, onDelete, onClose, allLeads }: ModalProps)
           </div>
           <div>
             <label className="block text-[11px] font-mono text-[#A1A1AA] tracking-wider mb-1">
-              PRIORITY
+              优先级
             </label>
             <select
               className={fieldCls}
               value={form.prio || "normal"}
               onChange={(e) => set("prio", e.target.value)}
             >
-              <option value="high">High Priority</option>
-              <option value="normal">Normal</option>
-              <option value="watch">Watch</option>
-              <option value="cold">Cold</option>
+              <option value="high">重点跟进</option>
+              <option value="normal">正常</option>
+              <option value="watch">观察</option>
+              <option value="cold">暂冷</option>
             </select>
           </div>
           <div className="col-span-2">
             <label className="block text-[11px] font-mono text-[#A1A1AA] tracking-wider mb-1">
-              CONTACT INFO
+              联系方式
             </label>
             <input
               className={fieldCls}
               value={form.contact || ""}
               onChange={(e) => set("contact", e.target.value)}
-              placeholder="Phone / Email / WeChat"
+              placeholder="电话 / 邮箱 / 微信"
             />
           </div>
           <div className="col-span-2">
             <label className="block text-[11px] font-mono text-[#A1A1AA] tracking-wider mb-1">
-              NEXT ACTION
+              下一步动作
             </label>
             <input
               className={fieldCls}
               value={form.next || ""}
               onChange={(e) => set("next", e.target.value)}
-              placeholder="e.g. Send NDA this week"
+              placeholder="例：本周发 NDA / 等对方尽调反馈"
             />
           </div>
           <div className="col-span-2">
             <label className="block text-[11px] font-mono text-[#A1A1AA] tracking-wider mb-1">
-              NOTES
+              备注
             </label>
             <textarea
               className={`${fieldCls} resize-y min-h-[56px]`}
               value={form.notes || ""}
               onChange={(e) => set("notes", e.target.value)}
-              placeholder="Communication log, pricing details, risk factors..."
+              placeholder="沟通记录、报价细节、风险点…"
               rows={3}
             />
           </div>
@@ -371,11 +371,11 @@ function Modal({ lead, isNew, onSave, onDelete, onClose, allLeads }: ModalProps)
           {/* Duplicate warning */}
           {hasDup && (
             <div className="col-span-2 text-xs font-mono text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2.5">
-              Warning: Duplicate buyer found — referred by:{" "}
-              <strong>{dupBrokers.join(", ") || "N/A"}</strong>.
+              ⚠ 已有相同买家记录，引荐中介：{" "}
+              <strong>{dupBrokers.join("、") || "未填"}</strong>。
               {brokerClash
-                ? ` Current broker "${form.broker}" differs — verify commission attribution.`
-                : " Check for duplicates."}
+                ? ` 与当前「${form.broker}」不同 —— 请确认佣金归属，避免纠纷。`
+                : " 注意是否重复。"}
             </div>
           )}
         </div>
@@ -387,7 +387,7 @@ function Modal({ lead, isNew, onSave, onDelete, onClose, allLeads }: ModalProps)
               onClick={() => lead?.id && onDelete(lead.id)}
               className="text-xs font-mono text-red-500 border border-red-200 rounded-lg px-3 py-2 hover:bg-red-50 transition-colors"
             >
-              Delete
+              删除
             </button>
           ) : (
             <div />
@@ -397,13 +397,13 @@ function Modal({ lead, isNew, onSave, onDelete, onClose, allLeads }: ModalProps)
               onClick={onClose}
               className="text-xs font-mono text-[#52525B] border border-[#E4E4E7] rounded-lg px-4 py-2 hover:bg-[#F4F4F5] transition-colors"
             >
-              Cancel
+              取消
             </button>
             <button
               onClick={handleSave}
               className="text-xs font-mono text-white bg-[#09090B] rounded-lg px-4 py-2 hover:bg-[#09090B]/85 transition-colors"
             >
-              Save
+              保存
             </button>
           </div>
         </div>
@@ -442,7 +442,7 @@ function Card({ lead, isDuplicate, onClick, onDragStart }: CardProps) {
     >
       <div className="flex items-start justify-between">
         <h3 className="text-[13px] font-semibold text-[#09090B] leading-snug">
-          {lead.buyer || "Unnamed"}
+          {lead.buyer || "未命名线索"}
         </h3>
         <button className="text-[#A1A1AA] hover:text-[#09090B] text-sm leading-none ml-2 flex-none">
           &hellip;
@@ -470,20 +470,20 @@ function Card({ lead, isDuplicate, onClick, onDragStart }: CardProps) {
       <div className="mt-2.5 pt-2.5 border-t border-dashed border-[#E4E4E7] space-y-1">
         {lead.broker && (
           <div className="flex items-center gap-1.5 text-[11px]">
-            <span className="text-[#A1A1AA] w-[52px] flex-none">Broker</span>
+            <span className="text-[#A1A1AA] w-[52px] flex-none">中介</span>
             <span className="text-[#0052FF] text-[9px]">&#9670;</span>
             <span className="text-[#09090B] font-medium truncate">{lead.broker}</span>
           </div>
         )}
         {lead.middle && (
           <div className="flex items-center gap-1.5 text-[11px]">
-            <span className="text-[#A1A1AA] w-[52px] flex-none">Middle</span>
+            <span className="text-[#A1A1AA] w-[52px] flex-none">中间人</span>
             <span className="text-[#0052FF] text-[9px]">&#9670;</span>
             <span className="text-[#09090B] font-medium truncate">{lead.middle}</span>
           </div>
         )}
         <div className="flex items-center gap-1.5 text-[11px]">
-          <span className="text-[#A1A1AA] w-[52px] flex-none">Buyer</span>
+          <span className="text-[#A1A1AA] w-[52px] flex-none">买家</span>
           <span className="text-[#0052FF] text-[9px]">&#9670;</span>
           <span className="text-[#09090B] font-medium truncate">{lead.buyer || "—"}</span>
         </div>
@@ -493,19 +493,19 @@ function Card({ lead, isDuplicate, onClick, onDragStart }: CardProps) {
       <div className="flex flex-wrap gap-1.5 mt-2.5">
         {lead.first && (
           <span className="text-[10px] font-mono text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-full px-2 py-0.5">
-            Referred {lead.first}
+            首引荐 {lead.first}
           </span>
         )}
         {isDuplicate && (
           <span className="text-[10px] font-mono text-red-500 bg-red-50 border border-red-200 rounded-full px-2 py-0.5">
-            Duplicate
+            ⚠ 重复引荐
           </span>
         )}
       </div>
 
       {lead.next && (
         <div className="mt-2 text-[11px] text-[#52525B] leading-relaxed">
-          <span className="text-[#0052FF] font-medium">Next:</span> {lead.next}
+          <span className="text-[#0052FF] font-medium">下一步：</span>{lead.next}
         </div>
       )}
 
@@ -567,7 +567,7 @@ function Column({ stage, leads, duplicates, onCardClick, onDrop }: ColumnProps) 
       </div>
       {sum > 0 && (
         <div className="px-3 py-1.5 font-mono text-[11px] text-amber-600">
-          Pipeline ${sum.toLocaleString("en-US")}
+          在谈 ${sum.toLocaleString("en-US")}
         </div>
       )}
 
@@ -575,7 +575,7 @@ function Column({ stage, leads, duplicates, onCardClick, onDrop }: ColumnProps) 
       <div className="flex-1 overflow-y-auto px-2 pb-3 pt-1 space-y-2 scrollbar-thin">
         {leads.length === 0 && (
           <div className="text-center text-[11px] text-[#A1A1AA] border border-dashed border-[#E4E4E7] rounded-lg py-6">
-            Drop cards here
+            拖拽卡片到此
           </div>
         )}
         {leads.map((lead) => (
@@ -626,8 +626,8 @@ function Dashboard() {
       setData(newData);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newData));
       setLastSave(
-        "Saved " +
-          new Date().toLocaleTimeString("en-US", {
+        "已保存 " +
+          new Date().toLocaleTimeString("zh-CN", {
             hour: "2-digit",
             minute: "2-digit",
           })
@@ -677,7 +677,7 @@ function Dashboard() {
   }
 
   function handleDelete(id: string) {
-    if (confirm("Delete this lead?")) {
+    if (confirm("确定删除这条线索？")) {
       save(data.filter((c) => c.id !== id));
       setModalLead(null);
     }
@@ -719,10 +719,10 @@ function Dashboard() {
             </span>
           </div>
           <h1 className="text-base font-bold tracking-tight">
-            Sales Pipeline Dashboard
+            土地销售渠道看板
           </h1>
           <span className="text-[11px] text-[#A1A1AA]">
-            Broker → Intermediary → Buyer · Multi-layer referral tracking
+            中介 → 中间人 → 买家 · 多层转介追踪
           </span>
         </div>
 
@@ -730,7 +730,7 @@ function Dashboard() {
           {/* Stats */}
           <div className="flex items-baseline gap-1.5 border border-[#E4E4E7] rounded-lg px-3 py-1.5 bg-[#FAF9F6]">
             <span className="font-mono text-sm font-bold">{activeCount}</span>
-            <span className="text-[10px] text-[#A1A1AA]">Active</span>
+            <span className="text-[10px] text-[#A1A1AA]">活跃线索</span>
           </div>
           <div className="flex items-baseline gap-1.5 border border-[#E4E4E7] rounded-lg px-3 py-1.5 bg-[#FAF9F6]">
             <span className="font-mono text-sm font-bold text-amber-600">
@@ -738,13 +738,13 @@ function Dashboard() {
                 ? "$" + Math.round(weightedValue).toLocaleString("en-US")
                 : "—"}
             </span>
-            <span className="text-[10px] text-[#A1A1AA]">Weighted</span>
+            <span className="text-[10px] text-[#A1A1AA]">加权在谈</span>
           </div>
           <div className="flex items-baseline gap-1.5 border border-[#E4E4E7] rounded-lg px-3 py-1.5 bg-[#FAF9F6]">
             <span className="font-mono text-sm font-bold text-red-500">
               {duplicates.size}
             </span>
-            <span className="text-[10px] text-[#A1A1AA]">Duplicates</span>
+            <span className="text-[10px] text-[#A1A1AA]">重复引荐</span>
           </div>
 
           <div className="flex-1" />
@@ -753,14 +753,14 @@ function Dashboard() {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search buyers / brokers..."
+            placeholder="搜索买家 / 中介 / 中间人…"
             className="px-3 py-2 rounded-lg border border-[#E4E4E7] bg-[#FAF9F6] text-sm text-[#09090B] placeholder:text-[#A1A1AA] focus:outline-none focus:ring-2 focus:ring-[#0052FF]/20 focus:border-[#0052FF] w-48 font-mono text-[12px]"
           />
           <button
             onClick={handleExport}
             className="text-[12px] font-mono text-[#52525B] border border-[#E4E4E7] rounded-lg px-3 py-2 hover:bg-[#F4F4F5] transition-colors"
           >
-            Export
+            导出备份
           </button>
           <button
             onClick={() => {
@@ -769,7 +769,7 @@ function Dashboard() {
             }}
             className="text-[12px] font-mono text-white bg-[#09090B] rounded-lg px-3.5 py-2 hover:bg-[#09090B]/85 transition-colors"
           >
-            + New Lead
+            + 新增线索
           </button>
         </div>
       </header>
@@ -794,7 +794,7 @@ function Dashboard() {
       {/* Footer */}
       <footer className="flex-none flex items-center justify-between px-5 py-2 border-t border-[#E4E4E7] bg-white">
         <span className="text-[10px] text-[#A1A1AA] font-mono">
-          Drag cards to move stages · Data saved in browser
+          拖拽卡片移动阶段 · 数据自动保存在本浏览器
         </span>
         <span className="text-[10px] text-[#A1A1AA] font-mono">{lastSave}</span>
       </footer>
